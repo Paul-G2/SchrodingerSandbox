@@ -25,7 +25,7 @@ class Controls
         this.playBtn = UiUtils.CreateElement('button', 'play-btn', this.parentDiv, 
             {left:'5%', top:'40%', width:'26%', height:'auto', background:backgndColor, borderWidth:'0px'});
         this.playBtn.className += " play_button noselect";
-        this.playBtn.innerHTML = '<img class="button-img" src="./media/play.png" border="0" width="100%" height="auto" draggable="false">';
+        this.playBtn.innerHTML = '<img class="button-img" src="./play.png" border="0" width="100%" height="auto" draggable="false">';
         this.playBtn.onclick = function(e) { self.app.startEvolving(); }
 
 
@@ -33,7 +33,7 @@ class Controls
         this.pauseBtn = UiUtils.CreateElement('button', 'pause-btn', this.parentDiv, 
             {left:'37%', top:'40%', width:'26%', height:'auto', background:backgndColor, borderWidth:'0px'});
         this.pauseBtn.className += " play_button noselect";
-        this.pauseBtn.innerHTML = '<img class="button-img" src="./media/pause.png" border="0" width="100%" height="auto" draggable="false">';
+        this.pauseBtn.innerHTML = '<img class="button-img" src="./pause.png" border="0" width="100%" height="auto" draggable="false">';
         this.pauseBtn.onclick = function(e) { self.app.stopEvolving(); }
 
         
@@ -41,7 +41,7 @@ class Controls
         this.resetBtn = UiUtils.CreateElement('button', 'reset-btn', this.parentDiv, 
             {left:'69%', top:'40%', width:'26%', height:'auto', background:backgndColor, borderWidth:'0px'});
         this.resetBtn.className += " play_button noselect";
-        this.resetBtn.innerHTML = '<img class="button-img" src="./media/reset.png" border="0" width="100%" height="auto" draggable="false">';
+        this.resetBtn.innerHTML = '<img class="button-img" src="./reset.png" border="0" width="100%" height="auto" draggable="false">';
         this.resetBtn.onclick = function(e) { self.app.stopEvolving(); self.app.resetEvolution(); }
 
 
