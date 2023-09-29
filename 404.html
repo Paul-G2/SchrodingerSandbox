@@ -1,7 +1,7 @@
 <script>
     window.onload = () => {
         const currentURL = window.location.href;
-        if (currentURL.toLowerCase().endsWith("schrodingersandbox")) {
+        if (currentURL.toLowerCase().endsWith("schrodingersandbox") || currentURL.toLowerCase().endsWith("schrodingersandbox/")) {
           const camelCaseURL = currentURL.substring(0, currentURL.length - 18) + "SchrodingerSandbox";
           location.replace(camelCaseURL);
         }
