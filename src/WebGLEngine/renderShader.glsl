@@ -48,10 +48,10 @@ float rgbaToFloat(vec4);
 //
 void main()
 {
-	int dbOffset = uShowDampingBorder ? 0 : uDampingBorderWidth;
+    int dbOffset = uShowDampingBorder ? 0 : uDampingBorderWidth;
     int numWfTrianglesToRender = 2 * (uN.x - 1 - 2*dbOffset) * (uN.y - 1 - 2*dbOffset);
-	
-	if (gl_InstanceID < numWfTrianglesToRender) {
+    
+    if (gl_InstanceID < numWfTrianglesToRender) {
         if (uFlatShade) {
             wavefunctionVertFlat(gl_InstanceID);
         } else {
@@ -183,15 +183,15 @@ void wavefunctionVertFlat(int triangleInstanceID)
 
 
     // Calculate the vertex color 
-	vec3 wfVals = getWfVals(ixL, iyL, dbOffset);
+    vec3 wfVals = getWfVals(ixL, iyL, dbOffset);
     float stripeWeight = (theProb <= 0.0) || (wfVals.y <= 0.0) ? 0.0 :
-		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/theProb, 12.0 );
+        pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/theProb, 12.0 );
     stripeWeight *= (theProb < 1e-4) ? 1e4*theProb : 1.0;
 
     vec4 wfColor = 
-		(uShowDampingBorder && ((ixL < dbw) || (iyL < dbw) || (ixL > NxvM1-dbw) || (iyL > NyvM1-dbw))) ?
-		uWfBorderColor : uWfColor; 
-    vColor = mix(wfColor, uWfStripeColor, stripeWeight); 	
+        (uShowDampingBorder && ((ixL < dbw) || (iyL < dbw) || (ixL > NxvM1-dbw) || (iyL > NyvM1-dbw))) ?
+        uWfBorderColor : uWfColor; 
+    vColor = mix(wfColor, uWfStripeColor, stripeWeight);     
 }
 
 
@@ -246,15 +246,15 @@ void wavefunctionVertSmooth(int triangleInstanceID)
 
 
     // Calculate the vertex color 
-	vec3 wfVals = getWfVals(ix0, iy0, dbOffset);
+    vec3 wfVals = getWfVals(ix0, iy0, dbOffset);
     float stripeWeight = (prob0 <= 0.0) || (wfVals.y <= 0.0) ? 0.0 :
-		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/prob0, 12.0 );
+        pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/prob0, 12.0 );
     stripeWeight *= (prob0 < 1e-4) ? 1e4*prob0 : 1.0;
 
     vec4 wfColor = 
-		(uShowDampingBorder && ((ix0 < dbw) || (iy0 < dbw) || (ix0 > NxvM1-dbw) || (iy0 > NyvM1-dbw))) ?
-		uWfBorderColor : uWfColor; 
-    vColor = mix(wfColor, uWfStripeColor, stripeWeight); 	
+        (uShowDampingBorder && ((ix0 < dbw) || (iy0 < dbw) || (ix0 > NxvM1-dbw) || (iy0 > NyvM1-dbw))) ?
+        uWfBorderColor : uWfColor; 
+    vColor = mix(wfColor, uWfStripeColor, stripeWeight);     
 }
 
 
@@ -268,7 +268,7 @@ float getScaledProb(int ix, int iy, int offset)
     float Im = rgbaToFloat( texelFetch(uWfImagMSampler, tc, 0) );
     float Ip = rgbaToFloat( texelFetch(uWfImagPSampler, tc, 0) );
 
-    return max(0.0, (R*R + Im*Ip)) * uWfScale;	
+    return max(0.0, (R*R + Im*Ip)) * uWfScale;    
 }
 
 
@@ -282,7 +282,7 @@ vec3 getWfVals(int ix, int iy, int offset)
     float Im = rgbaToFloat( texelFetch(uWfImagMSampler, tc, 0) );
     float Ip = rgbaToFloat( texelFetch(uWfImagPSampler, tc, 0) );
 
-    return vec3(R, Im, Ip);	
+    return vec3(R, Im, Ip);    
 }
 
 
@@ -322,15 +322,15 @@ out vec4 outColor;
 
 void main()
 {
-	vec3 normal = normalize(vNormal);	
-	vec3 lightDir = normalize(uLightDir);	
+    vec3 normal = normalize(vNormal);    
+    vec3 lightDir = normalize(uLightDir);    
     float cdot = clamp(-1.0*dot(normal, lightDir), 0.0, 1.0);
 
-	float diffuseLight = uDiffuseLightStrength * cdot;
+    float diffuseLight = uDiffuseLightStrength * cdot;
     float specularLight = uSpecularStrength * pow(cdot, uSpecularShininess);
     float totalLight = diffuseLight + specularLight + uAmbientLightStrength;
 
-	outColor = vec4(vColor.xyz * totalLight, vColor.w);
+    outColor = vec4(vColor.xyz * totalLight, vColor.w);
 }
 
 

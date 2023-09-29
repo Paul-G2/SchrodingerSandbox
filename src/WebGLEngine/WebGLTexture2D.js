@@ -6,10 +6,10 @@
 class WebGLTexture2D
 { 
     /**
-	 * @constructor
-	 * 
-	 */
-	constructor(glContext, txIndex, width, height, colorComponents, interpType, data=null) 
+     * @constructor
+     * 
+     */
+    constructor(glContext, txIndex, width, height, colorComponents, interpType, data=null) 
     {
         // Initialize members    
         this.glContext       = glContext;      

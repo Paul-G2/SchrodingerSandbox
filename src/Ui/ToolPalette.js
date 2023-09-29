@@ -16,7 +16,7 @@ class ToolPalette
     { 
         this.app = app;
         this.parentDiv = parentDiv;   
-        this.addShapeSound = new Audio('Ui/media/addShapeSound.mp3');
+        this.addShapeSound = new Audio('./media/addShapeSound.mp3');
         this.addShapeSound.preload = 'auto';
         const btnColor = '#99d9ea';
 

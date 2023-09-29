@@ -33,10 +33,10 @@ float rgbaToFloat(vec4);
 //
 void main()
 {
-	int dbOffset = uShowDampingBorder ? 0 : uDampingBorderWidth;
+    int dbOffset = uShowDampingBorder ? 0 : uDampingBorderWidth;
     int numWfTrianglesToRender = 2 * (uN.x - 1 - 2*dbOffset) * (uN.y - 1 - 2*dbOffset);
-	
-	if (gl_InstanceID < numWfTrianglesToRender) {
+    
+    if (gl_InstanceID < numWfTrianglesToRender) {
             wavefunctionVertShader(gl_InstanceID);
     }
     else {
@@ -85,7 +85,7 @@ void wavefunctionVertShader(int triangleInstanceID)
     gl_Position = uMvp * pos;
 
     // All wf vertices have id = 1
-    vObjectId = vec4(1.0/255.0, 1.0/255.0, 1.0/255.0, 1);	
+    vObjectId = vec4(1.0/255.0, 1.0/255.0, 1.0/255.0, 1);    
 }
 
 
@@ -126,7 +126,7 @@ void obstacleVertShader(int triangleInstanceID)
     tc.x += 8;
     if (tc.x >= textureWidth) { tc.x -= textureWidth;  tc.y += 1; } 
     float objId = texelFetch(uObstaclesSampler, tc, 0).x;
-    vObjectId = vec4(objId/255.0, objId/255.0, objId/255.0, 1);	
+    vObjectId = vec4(objId/255.0, objId/255.0, objId/255.0, 1);    
 }
 
 
@@ -140,7 +140,7 @@ float getScaledProb(int ix, int iy, int offset)
     float Im = rgbaToFloat( texelFetch(uWfImagMSampler, tc, 0) );
     float Ip = rgbaToFloat( texelFetch(uWfImagPSampler, tc, 0) );
 
-    return max(0.0, (R*R + Im*Ip)) * uWfScale;	
+    return max(0.0, (R*R + Im*Ip)) * uWfScale;    
 }
 
 
@@ -171,7 +171,7 @@ out vec4 outColor;
 
 void main()
 {
-	outColor = vObjectId;
+    outColor = vObjectId;
 }
 
 

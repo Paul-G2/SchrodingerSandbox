@@ -16,7 +16,7 @@ void main()
 {
     int vertexIndex = 3*gl_InstanceID + int(aLocalVertexIndex + 0.5);
 
-	switch (vertexIndex) {
+    switch (vertexIndex) {
         case 0:  { gl_Position = vec4(-1, -1, 0, 1);  vColor = uColor0; break; }
         case 1:  { gl_Position = vec4(-1,  1, 0, 1);  vColor = uColor1; break; }
         case 2:  { gl_Position = vec4( 1, -1, 0, 1);  vColor = uColor0; break; }
@@ -39,7 +39,7 @@ out vec4 outColor;
 // 
 void main()
 {
-	outColor = vColor;
+    outColor = vColor;
 }
 
 

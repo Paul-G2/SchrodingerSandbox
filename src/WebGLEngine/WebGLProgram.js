@@ -9,9 +9,9 @@ class WebGLProgram
     static setterFunctions = null;
 
     /**
-	 * @constructor
-	 * 
-	 */
+     * @constructor
+     * 
+     */
     constructor(context, name, vCode, fCode) 
     {
         // Initialize data members
@@ -53,7 +53,7 @@ class WebGLProgram
         gl.linkProgram(glProgram);
         if ( !gl.getProgramParameter(glProgram, gl.LINK_STATUS) && !gl.isContextLost() ) {
             Logger.error(this.name + " link error(s):\n" + gl.getProgramInfoLog(glProgram)); 
-        }	
+        }    
         else 
         {
             // Cache info about the program's uniforms and attributes, for quick access later.

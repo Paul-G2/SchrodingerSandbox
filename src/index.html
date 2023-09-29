@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Sandbox</title>
-		<link rel="stylesheet" href="Ui/styles.css"/>	
-		<link rel="icon" type="image/png" href="./media/appicon.png">
+    <head>
+        <meta charset="utf-8">
+        <title>Sandbox</title>
+        <link rel="stylesheet" href="Ui/styles.css"/>    
+        <link rel="icon" type="image/png" href="./media/appicon.png">
 
-		<script src="gl-matrix.js"></script>
-		<script src="App.js"></script>
-		<script src="RunParams.js"></script>
-		<script src="Wavefunction.js"></script>
-		<script src="Logger.js"></script>
-		
-		<script src="Ui/Topbar.js"></script>
-		<script src="Ui/ToolPalette.js"></script>
-		<script src="Ui/Controls.js"></script>
-		<script src="Ui/InfoDialog.js"></script>
-		<script src="Ui/Display.js"></script>
-		<script src="Ui/UiUtils.js"></script>
-		<script src="Ui/Interactor.js"></script>
+        <script src="gl-matrix.js"></script>
+        <script src="App.js"></script>
+        <script src="RunParams.js"></script>
+        <script src="Wavefunction.js"></script>
+        <script src="Logger.js"></script>
+        
+        <script src="Ui/Topbar.js"></script>
+        <script src="Ui/ToolPalette.js"></script>
+        <script src="Ui/Controls.js"></script>
+        <script src="Ui/InfoDialog.js"></script>
+        <script src="Ui/Display.js"></script>
+        <script src="Ui/UiUtils.js"></script>
+        <script src="Ui/Interactor.js"></script>
 
-		<script src="Obstacles/ObstacleSet.js"></script>
-		<script src="Obstacles/Obstacle.js"></script>
-		<script src="Obstacles/Arc.js"></script>
-		<script src="Obstacles/Box.js"></script>
-		<script src="Obstacles/Cylinder.js"></script>
-		<script src="Obstacles/DoubleSlit.js"></script>
-		<script src="Obstacles/Ramp.js"></script>
+        <script src="Obstacles/ObstacleSet.js"></script>
+        <script src="Obstacles/Obstacle.js"></script>
+        <script src="Obstacles/Arc.js"></script>
+        <script src="Obstacles/Box.js"></script>
+        <script src="Obstacles/Cylinder.js"></script>
+        <script src="Obstacles/DoubleSlit.js"></script>
+        <script src="Obstacles/Ramp.js"></script>
 
-		<script src="WebGpuEngine/WebGpuEngine.js"></script>
-		
-		<script src="WebGLEngine/WebGLEngine.js"></script>
-		<script src="WebGLEngine/WebGLProgram.js"></script>
-		<script src="WebGLEngine/WebGLAttributeBuffer.js"></script>
-		<script src="WebGLEngine/WebGLTexture2D.js"></script>
+        <script src="WebGpuEngine/WebGpuEngine.js"></script>
+        
+        <script src="WebGLEngine/WebGLEngine.js"></script>
+        <script src="WebGLEngine/WebGLProgram.js"></script>
+        <script src="WebGLEngine/WebGLAttributeBuffer.js"></script>
+        <script src="WebGLEngine/WebGLTexture2D.js"></script>
 
-		<script type="text/javascript">	
-			function main() { 
-				const app = new App();
-				app.initialize();
-			}
-		</script>
+        <script type="text/javascript">    
+            function main() { 
+                const app = new App();
+                app.initialize();
+            }
+        </script>
 
-	</head>
-	
-	<body onload="main()">
-		<div id="frame_area">
-			<div id="app_area">
-				<div id="topbar_area"></div>	
-				<div id="work_area">
-					<div id="display_area"></div>
-					<div id="controls_area"></div>
-				</div>	
-			</div>	
-		</div>
-	</body>
+    </head>
+    
+    <body onload="main()">
+        <div id="frame_area">
+            <div id="app_area">
+                <div id="topbar_area"></div>    
+                <div id="work_area">
+                    <div id="display_area"></div>
+                    <div id="controls_area"></div>
+                </div>    
+            </div>    
+        </div>
+    </body>
 
 </html>

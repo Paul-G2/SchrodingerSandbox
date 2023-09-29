@@ -6,9 +6,9 @@
 class WebGLAttributeBuffer
 { 
     /**
-	 * @constructor
-	 * 
-	 */
+     * @constructor
+     * 
+     */
     constructor(glContext, dataType, attrDim, data, options={}) 
     {
         // Initialize members

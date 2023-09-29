@@ -6,11 +6,11 @@
 class WebGLEngine 
 {
     /**
-	 * @constructor
+     * @constructor
      *
      * @param {App} app - The App instance.
-	 */
-	constructor(app) 
+     */
+    constructor(app) 
     {
         this.app = app;
         this.canvas = app.display.canvas;
@@ -111,14 +111,14 @@ class WebGLEngine
                 if (vSubs.hasOwnProperty(key)) {           
                     vCode = vCode.split(key).join(vSubs[key]); // Replaces all occurrences of key
                 }
-            }	
+            }    
         }
         if (fSubs) {
             for (let key in fSubs) {
                 if (fSubs.hasOwnProperty(key)) {           
                     fCode = fCode.split(key).join(vSubs[key]);
                 }
-            }	
+            }    
         }
 
         const prog = new WebGLProgram(this.glContext, name, vCode, fCode)

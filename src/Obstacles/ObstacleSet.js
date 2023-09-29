@@ -6,19 +6,19 @@
 ObstacleSet = class
 {
     /**
-	 * @constructor
+     * @constructor
      *
      * @param {App} app - The App instance.
      */
     constructor(app)
-	{
+    {
         this.app = app;
-		this.obstacles = [];
+        this.obstacles = [];
 
         // Allowed obstacle ids are [2, 3, ..., 255]. (0 is reseverd for background, a
         // nd 1 is for the wavefunction.)
         this.availableIds = Array.from({length: 254}, (_, index) => index + 2);
-	}
+    }
 
 
     /**

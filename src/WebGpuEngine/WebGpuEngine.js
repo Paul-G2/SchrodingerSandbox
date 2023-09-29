@@ -6,11 +6,11 @@
 class WebGpuEngine 
 {
     /**
-	 * @constructor
+     * @constructor
      *
      * @param {App} app - The App instance.
-	 */
-	constructor(app, workgroupSize={x:8, y:8}) 
+     */
+    constructor(app, workgroupSize={x:8, y:8}) 
     {
         this.app = app;
         this.canvas = app.display.canvas;
@@ -218,7 +218,7 @@ class WebGpuEngine
                     module: renderShader, 
                     entryPoint: 'vertMain',
                 },
-                fragment: {	
+                fragment: {    
                     module: renderShader, 
                     entryPoint: 'fragMain', 
                     targets: [{ 
@@ -249,7 +249,7 @@ class WebGpuEngine
                     module: bkgndShader, 
                     entryPoint: 'vertMain',
                 },
-                fragment: {	
+                fragment: {    
                     module: bkgndShader, 
                     entryPoint: 'fragMain', 
                     targets: [{ 
@@ -283,7 +283,7 @@ class WebGpuEngine
                 module: pickShader, 
                 entryPoint: 'vertMain',
             },
-            fragment: {	
+            fragment: {    
                 module: pickShader, 
                 entryPoint: 'fragMain', 
                 targets: [{ 
@@ -316,7 +316,7 @@ class WebGpuEngine
                 if (subs.hasOwnProperty(key)) {           
                     codeString = codeString.split(key).join(subs[key]); // Replaces all occurrences of key
                 }
-            }	
+            }    
         }
 
         const module = this.device.createShaderModule({
