@@ -139,6 +139,7 @@ Interactor = class
 		}
 		if (this.activeObject) {
 			const objCtr = [...this.activeObject.bboxCenter(), 1];
+			objCtr[2] = this.activeObject.bbox.zmax;
 			const objCtrProj = vec4.transformMat4(vec4.create(), objCtr, this.mvp);
 			this.activeObjectPivotPt = [ objCtrProj[0]/objCtrProj[3], -objCtrProj[1]/objCtrProj[3] ];
 		}

@@ -7,14 +7,7 @@ class WebGLTexture2D
 { 
     /**
 	 * @constructor
-     *
-     * @param {WebGL2RenderingContext} glContext - A WebGL2 rendering context.
-     * @param {Number} txIndex - The texture index. Must be in the range [0, gl.MAX_TEXTURE_IMAGE_UNITS-1].
-     * @param {Number} width - The desired width of the texture.
-     * @param {Number} height - The desired height of the texture.
-     * @param {GLenum} colorComponents - The pixel internal format (gl.RGB, gl.RGBA, gl.R32F, etc).
-     * @param {GLenum} interpType - The interpolation type (gl.LINEAR or gl.NEAREST).
-     * @param {TypedArray} data - The data to place in the texture.
+	 * 
 	 */
 	constructor(glContext, txIndex, width, height, colorComponents, interpType, data=null) 
     {
@@ -62,9 +55,6 @@ class WebGLTexture2D
     /**
      * Resizes the Texture.
      * 
-     * @param {Number} newWidth - The desired width of the texture.
-     * @param {Number} newHeight - The desired height of the texture.
-     * @param {TypedArray} data - The data to place in the texture.
      */
     resize(newWidth, newHeight, data=null) 
     { 
@@ -109,8 +99,6 @@ class WebGLTexture2D
      * Copies this texture's data into another texture.
      * The size and format of the two textures must match.
      * 
-     * @param {Texture2D} dest - The destination texture.
-     * @param {WebGLFrameBuffer} frameBuffer - A WebGL framebuffer.
      */
     copyTo(dest, frameBuffer)
     {

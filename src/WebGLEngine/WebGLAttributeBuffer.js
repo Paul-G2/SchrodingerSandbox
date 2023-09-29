@@ -6,14 +6,9 @@
 class WebGLAttributeBuffer
 { 
     /**
-     * @param {WebGLRenderingContext} glContext - The rendering context.
-     * @param {GLenum} [dataType] - The buffer's data type (gl.FLOAT, gl.BYTE, gl.SHORT, gl.UNSIGNED_BYTE, gl.UNSIGNED_SHORT, or gl.HALF_FLOAT)
-     * @param {Number} [attrDim] - The number of components per attribute. Must be 1, 2, 3, or 4.
-     * @param {Array} data - The data to be stored in the buffer.
-     * @param {Object} [options] - Optional parameters. 
-     * @param {GLenum} options.drawMode=gl.STATIC_DRAW - A data-usage hint for WebGL (gl.STATIC_DRAW, gl.DYNAMIC_DRAW, or gl.STREAM_DRAW)
-     * @param {Boolean} options.normalizeValues=false - Whether to normalize integer data values when casting to float. 
-     */
+	 * @constructor
+	 * 
+	 */
     constructor(glContext, dataType, attrDim, data, options={}) 
     {
         // Initialize members

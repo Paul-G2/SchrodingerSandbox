@@ -296,7 +296,7 @@ class WebGLEngine
         cProg.setUniform('uMass', rp.mass, false);
 
         pProg.setUniform('uN', [rp.grid.nx, rp.grid.ny], true);
-        pProg.setUniform('uWfScale', rp.wfScale/rp.initialWf.maxProb, false); 
+        pProg.setUniform('uWfScale', rp.wfScale, false); 
         pProg.setUniform('uDampingBorderWidth', rp.grid.dampingBorder, false); 
         pProg.setUniform('uShowDampingBorder', rp.showDampingBorder ? 1 : 0, false); 
         pProg.setUniform('uAttrsPerVertex', Obstacle.AttrsPerVertex, false); 

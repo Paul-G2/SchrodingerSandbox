@@ -9,11 +9,9 @@ class WebGLProgram
     static setterFunctions = null;
 
     /**
-    * @param {WebGLRenderingContext} context - The rendering context. 
-    * @param {String} name - A name for the program.
-    * @param {String} vCode - The vertex shader code.
-    * @param {String} fCode - The fragment shader code.
-    */
+	 * @constructor
+	 * 
+	 */
     constructor(context, name, vCode, fCode) 
     {
         // Initialize data members
@@ -85,9 +83,6 @@ class WebGLProgram
     /**
      * Sets the value of a uniform variable.
      * 
-     * @param {string} name - The name of the variable to set.
-     * @param {number} val - The value to set.
-     * @param {boolean} [setProgram=true] - Whether to call gl.useProgram before setting the uniform value.
      */
     setUniform(name, val, setProgram=true)
     {
@@ -117,9 +112,6 @@ class WebGLProgram
      * Gets the value of a uniform variable.
      * Note: This method can be slow, because it requires communication with the GPU.
      *
-     * @param {string} name - The name of the variable to get.
-     * @param {number} [index] - The index of the array element to get. (Only required when the
-     *   named variable is an array.)
      */
     getUniform(name, index)
     {
@@ -143,10 +135,6 @@ class WebGLProgram
     /**
      * Sets a vertex-attribute buffer.
      * 
-     * @param {string} name - The name of the vertex attribute.
-     * @param {AttributeBuffer} attrBuffer - An AttributeBuffer containing the vertex-attribute values.
-     * @param {Boolean} [bind=true] - Whether to bind the buffer in WebGL.
-     * @param {number} [bufferOffset=0] - The offset in bytes to the first component in the buffer.
      */
     setAttribute(name, attrBuffer, bind=true, bufferOffset=0)
     {

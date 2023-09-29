@@ -21,22 +21,22 @@ class ToolPalette
         const btnColor = '#99d9ea';
 
         const self = this;
-        this.cylBtn = this.createObstacleButton('cyl-obstacle-btn', 1, 1, btnColor, "Ui/media/cyl.png");
+        this.cylBtn = this.createObstacleButton('cyl-obstacle-btn', 1, 1, btnColor, "./media/cyl.png");
         this.cylBtn.onclick = function() { self.addObstacle( new Cylinder({vMax:self.app.engine.runParams.Vmax}) ); };
 
-        this.boxBtn = this.createObstacleButton('box-obstacle-btn', 1, 2, btnColor, "Ui/media/box.png");
+        this.boxBtn = this.createObstacleButton('box-obstacle-btn', 1, 2, btnColor, "./media/box.png");
         this.boxBtn.onclick = function() { self.addObstacle( new Box({vMax:self.app.engine.runParams.Vmax}) ); };
 
-        this.slitBtn = this.createObstacleButton('slit-obstacle-btn', 1, 3, btnColor, "Ui/media/slits.png");
+        this.slitBtn = this.createObstacleButton('slit-obstacle-btn', 1, 3, btnColor, "./media/slits.png");
         this.slitBtn.onclick = function() { self.addObstacle( new DoubleSlit({vMax:self.app.engine.runParams.Vmax}) ); };
 
-        this.rampBtn = this.createObstacleButton('ramp-obstacle-btn', 2, 1, btnColor, "Ui/media/ramp.png");
+        this.rampBtn = this.createObstacleButton('ramp-obstacle-btn', 2, 1, btnColor, "./media/ramp.png");
         this.rampBtn.onclick = function() { self.addObstacle( new Ramp({vMax:0.6*self.app.engine.runParams.Vmax}) ); };
 
-        this.arcBtn = this.createObstacleButton('arc-obstacle-btn', 2, 2, btnColor, "Ui/media/arc.png");
+        this.arcBtn = this.createObstacleButton('arc-obstacle-btn', 2, 2, btnColor, "./media/arc.png");
         this.arcBtn.onclick = function() { self.addObstacle( new Arc({vMax:self.app.engine.runParams.Vmax}) ); };
 
-        this.corralBtn = this.createObstacleButton('corral-obstacle-btn', 2, 3, btnColor, "Ui/media/corral.png");
+        this.corralBtn = this.createObstacleButton('corral-obstacle-btn', 2, 3, btnColor, "./media/corral.png");
         this.corralBtn.onclick = function() { self.addObstacle( new Arc({vMax:self.app.engine.runParams.Vmax, 
             center:[0.6, 0.6], radius:0.19, span:320, height:0.1998, color:[0.86, 0.86, 0.86, 1]}) ); };
     }

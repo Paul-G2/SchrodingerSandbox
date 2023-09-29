@@ -185,7 +185,7 @@ void wavefunctionVertFlat(int triangleInstanceID)
     // Calculate the vertex color 
 	vec3 wfVals = getWfVals(ixL, iyL, dbOffset);
     float stripeWeight = (theProb <= 0.0) || (wfVals.y <= 0.0) ? 0.0 :
-		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/theProb, 6.0 );
+		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/theProb, 12.0 );
     stripeWeight *= (theProb < 1e-4) ? 1e4*theProb : 1.0;
 
     vec4 wfColor = 
@@ -248,7 +248,7 @@ void wavefunctionVertSmooth(int triangleInstanceID)
     // Calculate the vertex color 
 	vec3 wfVals = getWfVals(ix0, iy0, dbOffset);
     float stripeWeight = (prob0 <= 0.0) || (wfVals.y <= 0.0) ? 0.0 :
-		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/prob0, 6.0 );
+		pow( max(0.0, wfVals.y*wfVals.z) * uWfScale/prob0, 12.0 );
     stripeWeight *= (prob0 < 1e-4) ? 1e4*prob0 : 1.0;
 
     vec4 wfColor = 
