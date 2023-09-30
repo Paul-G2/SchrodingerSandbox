@@ -83,7 +83,7 @@ InfoDialog = class
         'and then moved and rotated interactively.</p>' +
 
         '<p>If you\'re interested in  the implementation details, you can check out the ' + 
-        '<a href="https://github.com/Paul-G2/Schrodinger-Sandbox">project repository</a> on GitHub.</p>' +
+        '<a href="https://github.com/Paul-G2/Schrodinger-Sandbox" target="_blank" rel="noopener noreferrer">project repository</a> on GitHub.</p>' +
         '<br />';
     } 
 
