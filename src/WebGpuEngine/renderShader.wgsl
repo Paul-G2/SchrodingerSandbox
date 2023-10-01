@@ -17,6 +17,7 @@ struct Uniforms {
     specularStrength: f32,
     specularShininess: f32,
     attrsPerVertex: u32,
+    activeObjectId: u32,
     lightDir: vec3f
 };
 
@@ -76,6 +77,12 @@ fn obstacleVert(vertexIndex : u32) -> VSOutput
     let normal = normalize( vec3f(obstacles[i+3], obstacles[i+4], obstacles[i+5]) );
     vsOut.normal = (uni.rot * vec4f(normal, 1)).xyz; 
     vsOut.color = vec4f( obstacles[i+6], obstacles[i+7], obstacles[i+8], obstacles[i+9] );
+
+    // Highlight the selected obstacle
+    if (uni.activeObjectId == u32(obstacles[i+10] + 0.5)) {
+        vsOut.color *= 1.3;
+        vsOut.color.a = 1f;
+    } 
     
     return vsOut;
 }

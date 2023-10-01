@@ -548,6 +548,16 @@ class WebGpuEngine
 
 
     /**
+     * Informs the engine about a new active object.
+     * 
+     */
+    onActiveObjectChanged(newActiveObjectId)
+    {
+        this.device.queue.writeBuffer(this.renderUniformsBuffer, 220, new Uint32Array([newActiveObjectId])); 
+    }
+
+
+    /**
      * Sends the transformation matrices to the gpu.
      *  
      */
