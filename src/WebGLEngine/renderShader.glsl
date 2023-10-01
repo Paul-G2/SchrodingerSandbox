@@ -24,6 +24,7 @@ uniform float  uAmbientLightStrength;
 uniform float  uDiffuseLightStrength;
 uniform float  uSpecularStrength;
 uniform float  uSpecularShininess;
+uniform int    uActiveObjectId;
 uniform vec3   uLightDir;
 
 uniform sampler2D uWfRealSampler;
@@ -115,6 +116,16 @@ void obstacleVert(int triangleInstanceID)
     tc.x += 1;
     if (tc.x == textureWidth) { tc.x = 0;  tc.y += 1; } 
     color.a = texelFetch(uObstaclesSampler, tc, 0).x;
+
+    tc.x += 1;
+    if (tc.x == textureWidth) { tc.x = 0;  tc.y += 1; } 
+    int objId = int(texelFetch(uObstaclesSampler, tc, 0).x + 0.5);
+
+    // Highlight the active obstacle
+    if (objId == uActiveObjectId) {
+        color *= 1.4; 
+        color.a = 1.0;
+    }
 
     if (uShowDampingBorder)
     {

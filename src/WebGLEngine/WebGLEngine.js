@@ -247,6 +247,16 @@ class WebGLEngine
         this.onPotentialChanged();
     }
 
+    
+    /**
+     * Informs the engine about a new active object.
+     * 
+     */
+    onActiveObjectChanged(newActiveObjectId)
+    {
+        this.renderProgram.setUniform('uActiveObjectId', newActiveObjectId, true);
+    }
+
 
     /**
      * Sends the transformation matrices to the gpu.
