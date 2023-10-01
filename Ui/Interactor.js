@@ -28,7 +28,7 @@ Interactor = class
         this.activeObjectPivotPt = null;
         this.mode = 'none'; 
         this.timerId = undefined;
-        this.removeShapeSound = new Audio('./removeShapeSound.mp3');
+        this.removeShapeSound = new Audio('./media/removeShapeSound.mp3');
         this.removeShapeSound.preload = 'auto';
 
         // Precompute the model transform
@@ -143,6 +143,7 @@ Interactor = class
             const objCtrProj = vec4.transformMat4(vec4.create(), objCtr, this.mvp);
             this.activeObjectPivotPt = [ objCtrProj[0]/objCtrProj[3], -objCtrProj[1]/objCtrProj[3] ];
         }
+        this.app.engine.onActiveObjectChanged(this.activeObject ? this.activeObject.id : 0);
         
         // Determine our interaction mode
         if (this.pointers.size == 1)
@@ -345,6 +346,7 @@ Interactor = class
                     app.engine.runParams.obstacleSet.remove(this.activeObject);
                 }
             }
+            this.app.engine.onActiveObjectChanged(0);
 
             this.pinchInfo = null;
             this.activeObject = null;
