@@ -142,10 +142,11 @@ fn wavefunctionVertFlat(vertexIndex : u32) -> VSOutput
 
 
     // Calculate the vertex color 
+    let pwr = max(2f, min(12f, f32(uni.N.x)/128f));
     let ixyL = (ixL + dbOffset) + (iyL + dbOffset) * i32(uni.N.x);
     var stripeWeight = select(
         0f,
-        pow( max(0f, wfIm[ixyL] * wfIp[ixyL]) * uni.wfScale / theProb, 12f ),
+        pow( max(0f, wfIm[ixyL] * wfIp[ixyL]) * uni.wfScale / theProb, pwr ),
         (theProb > 0) && (wfIm[ixyL] > 0f)
     );
     stripeWeight *= select(1f, 1e3*theProb, theProb < 1e-3);
@@ -212,10 +213,11 @@ fn wavefunctionVertSmooth(vertexIndex : u32) -> VSOutput
 
 
     // Calculate the vertex color 
+    let pwr = max(2f, min(12f, f32(uni.N.x)/128f));
     let ixy0 = (ix0 + dbOffset) + (iy0 + dbOffset) * i32(uni.N.x);
     var stripeWeight = select(
         0f,
-        pow( max(0f, wfIm[ixy0] * wfIp[ixy0]) * uni.wfScale / prob0, 12f ),
+        pow( max(0f, wfIm[ixy0] * wfIp[ixy0]) * uni.wfScale / prob0, pwr),
         (prob0 > 0) && (wfIm[ixy0] > 0f)
     );
     stripeWeight *= select(1f, 1e4*prob0, prob0 < 1e-4);
