@@ -56,7 +56,7 @@ class App
     async initialize()
     {        
         // Try to create an engine
-        this.display.raiseShield();
+        this.raiseShield();
         try 
         {
             let engineOk = true;
@@ -95,14 +95,14 @@ class App
             this.engine.resetEvolution();
             requestAnimationFrame(function() {
                 this.engine.evolveAndRender(0); 
-                this.display.lowerShield();
+                this.lowerShield();
             }.bind(this));     
         }
         catch (err) {
             const msg = err && err.message ? err.message : "An exception occurred.";
             alert(msg);
             Logger.error(msg);
-            this.display.lowerShield();
+            this.lowerShield();
         }
     }
 
@@ -251,6 +251,28 @@ class App
         const fps = (numIters - warmup) * 1000/(Date.now() - this.startTime);
         this.frameCount = this.startTime = undefined;
         return fps;
+    }
+
+
+    /**
+     * Raises the shield.
+     * 
+     */
+    raiseShield()
+    {
+        this.display.raiseShield();
+        this.controls.raiseShield();
+    }
+
+
+    /**
+     * Lowers the shield.
+     * 
+     */
+    lowerShield()
+    {
+        this.display.lowerShield();
+        this.controls.lowerShield();
     }
 
 };
