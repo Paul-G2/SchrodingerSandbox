@@ -70,6 +70,11 @@ class Controls
             }
         };
 
+        // Create a "shield" to prevent interaction when initializing
+        this.shield = UiUtils.CreateElement('div', 'controls-shield', parentDiv, 
+            {position: 'absolute', width:'100%', height:'100%', background:'rgba(0, 0, 0, 0.5)',
+            backgroundColor:'rgba(0, 0, 0, 0.5)', zIndex:'5', display:'flex'}
+        );
 
         // Disable context menu and selection
         document.getElementById('controls_area').className += ' noselect';
@@ -81,4 +86,22 @@ class Controls
         } );
     }
 
+    /**
+     * Raises the shield.
+     * 
+     */
+    raiseShield()
+    {
+        this.shield.style.display = 'flex';
+    }
+
+    /**
+     * Lowers the shield.
+     * 
+     */
+    lowerShield()
+    {
+        this.shield.style.display = 'none';
+    }
+    
 };
