@@ -28,7 +28,7 @@ Interactor = class
         this.activeObjectPivotPt = null;
         this.mode = 'none'; 
         this.timerId = undefined;
-        this.removeShapeSound = new Audio('./removeShapeSound.mp3');
+        this.removeShapeSound = new Audio('./media/removeShapeSound.mp3');
         this.removeShapeSound.preload = 'auto';
 
         // Precompute the model transform
@@ -154,6 +154,7 @@ Interactor = class
             else {
                 this.mode = (ptr.ctrl || (ptr.button == 1)) ? 'zoom' :
                     (ptr.shift || (ptr.button == 2)) ? 'pan' : 
+                    (event.pointerType === "touch") ? 'pan' :
                     ((ptr.button === 0) || (ptr.button == -1)) ? 'rotate' : 'none';
             }
         }
@@ -232,41 +233,41 @@ Interactor = class
                 this._renderUpdatedObstacles();
             }
         }
-        else if (this.mode == 'pinch-pose')
+        else if ( ((this.mode == 'pinch-pose') || (this.mode == 'pinch-pose-object')) && this.pinchInfo )
         {
-            if (this.pinchInfo) {
-                const [dxp, dyp] = this.pinchInfo.calcDeltaCenter(this.pointers);
-                const panScale = 2.25 * 2.0/(this.zoom * Math.min(cw, ch));
-                this.pan[0] += panScale * dxp;
-                this.pan[1] -= panScale * dyp;    
-                
+            const [dxc, dyc, prevCtr, currCtr] = this.pinchInfo.calcDeltaCenter(this.pointers);
+          
+            if (this.mode == 'pinch-pose')
+            {
+                const trackballSize = [cw, ch];
+                const deltaRot = Interactor._CalcRotationMatrix(null, prevCtr, currCtr, trackballSize);
+                mat4.multiply(this.rot, deltaRot, this.rot);     
+
                 const newZoom = this.pinchInfo.calcZoom(this.pointers);
                 if (newZoom !== undefined) {
                     this.zoom = Math.max(Math.min(newZoom, this.MaxZoom), this.MinZoom);
                 }
 
-                const deltaAngle = this.pinchInfo.calcDeltaAngle(this.pointers);
+                const deltaAngle = this.pinchInfo.calcDeltaTwist(this.pointers);
                 if (deltaAngle) {
                     const deltaRot = mat4.fromZRotation(mat4.create(), -deltaAngle);
                     mat4.multiply(this.rot, deltaRot, this.rot);
                 }
             }
-        }
-        else if (this.mode == 'pinch-pose-object')
-        {
-            if (this.pinchInfo) {
-                const deltaAngle = this.pinchInfo.calcDeltaAngle(this.pointers);
+            else if (this.mode == 'pinch-pose-object')
+            {
+                const deltaAngle = this.pinchInfo.calcDeltaTwist(this.pointers);
                 if (deltaAngle) {
                     this.activeObject.rotate(deltaAngle);
                 }
                 
-                const [dxp, dyp] = this.pinchInfo.calcDeltaCenter(this.pointers);
-                const objDelta = this._getObjectDeltaFromMouseDelta(dxp, dyp);
+                const objDelta = this._getObjectDeltaFromMouseDelta(dxc, dyc);
                 if (!isNaN(objDelta[0]) && !isNaN(objDelta[1])) {
                     this.activeObject.translate(objDelta[0], objDelta[1]);
                 }
 
                 this._renderUpdatedObstacles();
+                
             }
         }
         event.preventDefault();
@@ -591,9 +592,10 @@ PinchInfo = class
 
         const currCtr = { x:(ptrA.currPos.x + ptrB.currPos.x)/2,  y:(ptrA.currPos.y + ptrB.currPos.y)/2 };
         const [dx, dy] = [currCtr.x - this.prevCtr.x, currCtr.y - this.prevCtr.y];
+        const retVal = [dx, dy, this.prevCtr, currCtr];
         this.prevCtr = currCtr;
 
-        return [dx, dy];
+        return retVal;
     }
 
 
@@ -619,11 +621,11 @@ PinchInfo = class
 
 
     /**
-     * Calculates a modified rotation angle based on how 
+     * Calculates a modified twist angle based on how 
      * much the pinch angle has changed.
      * 
      */
-    calcDeltaAngle(currentPointers) 
+    calcDeltaTwist(currentPointers) 
     {
         if (currentPointers.size != 2) { return undefined; }
 
