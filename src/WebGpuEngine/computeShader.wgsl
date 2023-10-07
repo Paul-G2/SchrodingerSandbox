@@ -43,8 +43,6 @@ override hamSign: f32 = 1.0;
     let xmm = select(nxm1, xm-1, xm > 0);
     let nxy = yOffset + x;
 
-    // This is the Visscher discretization of the Schrodinger equation
-    // (see Computers in Physics 5, 596 (1991)):
     let keFactor = 
         1.0/(2.0 * uni.mass * uni.gridSpacing * uni.gridSpacing);
     let ke = keFactor * (
@@ -57,5 +55,7 @@ override hamSign: f32 = 1.0;
     let Vreal = max(0f, Vcomp);
     let Vimag = min(0f, Vcomp); // Imaginary potentials are encoded as negative values.
     if (hamSign < 0.0) { wfIm[nxy] = leftWf[nxy]; }
+
+    // This is the Visscher discretization of the Schrodinger equation (see Computers in Physics 5, 596 (1991))
     leftWf[nxy] += uni.timeStep * (hamSign*(ke + Vreal*rightWf[nxy]) + Vimag*leftWf[nxy]);
 }
