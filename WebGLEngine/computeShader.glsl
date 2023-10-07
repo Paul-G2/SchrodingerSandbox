@@ -66,8 +66,6 @@ void main()
     int xmm = xm > 0 ? xm-1 : Nxm1;
     int ymm = ym > 0 ? ym-1 : Nym1;
 
-    // This is the Visscher discretization of the Schrodinger equation
-    // (see Computers in Physics 5, 596 (1991)):
     float keFactor = 1.0/(2.0 * uMass * uGridSpacing * uGridSpacing);
     float rightWfxy = rightWf(x, y);
     float ke = keFactor * (
@@ -79,6 +77,8 @@ void main()
     float V = texelFetch(uPotentialSampler, ivec2(x,y), 0).x;
     float Vreal = max(0.0, V);
     float Vimag = min(0.0, V); // Interpret negative potentials as imaginary
+
+    // This is the Visscher discretization of the Schrodinger equation (see Computers in Physics 5, 596 (1991))
     float outVal = leftWf(x,y)*(1.0 + uTimeStep*Vimag) + uHamSign*uTimeStep*(ke + Vreal*rightWfxy);
 
     outColor = floatToRgba(outVal);
