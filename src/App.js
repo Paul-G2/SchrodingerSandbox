@@ -116,6 +116,7 @@ class App
         {
             this.evolving = true;
             this.animate();
+            this.topBar.startAnimation();
 
             this.autoStopTimer = setTimeout(
                 function() {this.stopEvolving()}.bind(this), 60000);
@@ -129,6 +130,7 @@ class App
     stopEvolving()
     {
         this.evolving = false;
+        this.topBar.stopAnimation();
 
         if (this.autoStopTimer !== null) {
             clearTimeout(this.autoStopTimer);
