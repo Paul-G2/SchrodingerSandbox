@@ -77,7 +77,7 @@ class App
                 }
             }
             if (!engineOk) {
-                const msg = "Couldn't initialize WebGPU or WebGL."
+                const msg = "Sorry, initialization failed. This app needs WebGPU or WebGL to run."
                 alert(msg);
                 Logger.error(msg);
                 return;
@@ -85,10 +85,16 @@ class App
             Logger.info("Using " + this.engine.constructor.name);
 
             // Determine the optimal grid resolution for the current device
-            const rez = await this._getOptimalGridResolution();
+            const [rez, fps] = await this._getOptimalGridResolution();
+            rp = new RunParams(this, rez); 
+
+            this.controls.infoDialog.textDiv.innerHTML = this.controls.infoDialog.textDiv.innerHTML.replace(
+                '#Note1#', 'Found ' + this.engine.type + ' on this device.');
+            this.controls.infoDialog.textDiv.innerHTML = this.controls.infoDialog.textDiv.innerHTML.replace(
+                '#Note2#', 'Grid size set to ' + rp.grid.nx.toString() + ', FPS = ' + fps.toString() + '.' );
 
             // Render the initial scene
-            rp = new RunParams(this, rez); 
+            
             rp.showDampingBorder = this.showBorder;
             rp.obstacleSet.add( new DoubleSlit(), false );
             this.engine.setRunParams(rp);
@@ -193,6 +199,7 @@ class App
         this.engine.setTransforms(...this.interactor.getTransforms());
 
         // Gradually increase resolution until the performance degrades
+        let fpsVals = [];
         let fpsText = [];
         const rezList = [128, 192, 256, 384, 512, 768, 1024, 1536, 2048];
         let r = 0;
@@ -206,7 +213,8 @@ class App
                 if (fps < 50) { 
                     fps = await this._measureFps(15, 8, rp.evolutionChunkSize); // Retry
                 }
-                fpsText.push('rez: ' + rezList[r].toString() + '.  fps: ' + fps.toString());
+                fpsVals.push(Math.round(fps));
+                fpsText.push('rez: ' + rezList[r].toString() + '.  fps: ' + Math.round(fps).toString());
                 if (fps < 50) {
                     r -= 1;
                     break;
@@ -221,7 +229,7 @@ class App
         fpsText.push('Chosen ' + fpsText[r]);
         Logger.info(fpsText.join('\n'));
 
-        return rezList[r];
+        return [rezList[r], fpsVals[r]];
     }
 
 

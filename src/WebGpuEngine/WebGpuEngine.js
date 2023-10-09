@@ -12,6 +12,7 @@ class WebGpuEngine
      */
     constructor(app, workgroupSize={x:8, y:8}) 
     {
+        this.type = "WebGPU";
         this.app = app;
         this.canvas = app.display.canvas;
         this.workgroupSize = {...workgroupSize};

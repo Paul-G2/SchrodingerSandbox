@@ -12,6 +12,7 @@ class WebGLEngine
      */
     constructor(app) 
     {
+        this.type = "WebGL";
         this.app = app;
         this.canvas = app.display.canvas;
         this.glContext = null;
