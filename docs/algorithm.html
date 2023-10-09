@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Details</title>
+        <!-- <link rel="stylesheet" href="Ui/styles.css"/>     -->
+        
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']]
+                }
+            };
+        </script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+   
+
+    <body>
+        <div style="width:100%; height:100%; background-image: linear-gradient(to bottom right, #93b9ff, white)">
+        <div style="width:900px; margin:auto; padding-left:7em; padding-right:7em; background-color: white">
+        <span style = "font-size:1.2em; font-family:Georgia, 'Times New Roman', Times, serif;">
+        <br/>
+        <h1 style="text-align:center;">Algorithm Details</h1>
+        <br/>
+        Our initial state is always a 2-dimensional Gaussian wavepacket 
+        centered at some $\mathbf{r}_0$, with width $\sigma$ and average momentum $\mathbf{k}$:
+        $${ 
+            \psi(\mathbf{r},0) = N \, e^{-(\mathbf{r}-\mathbf{r_0})^2 / 2\sigma^2} \; e^{i\mathbf{k}\cdot\mathbf{r}} \; , \tag{1}
+        }$$
+        
+        where $N$ is a normalization constant. 
+        <br/><br/>
+
+        This state evolves in time according to the Schr&#246;dinger equation, 
+        
+        $${ 
+                i {\partial\psi(\mathbf{r},t)\over \partial t} = H \psi(\mathbf{r},t) = \left( -{\nabla^2 \over 2m} + V(\mathbf{r})\right) {\psi(\mathbf{r},t) \; .} \tag{2}
+        }$$
+        
+        Here, $H$ is the Hamiltonian, $V$ is the potential energy function, $m$ is the particle mass, and we are using units in which Planck’s constant ℏ is equal to 1.
+
+        <br/><br/>
+        Equation (2) can be solved numerically by discretizing the wavefunction in both space and time: We suppose that $\psi$ lives on a rectangular grid with spacing $a$,
+        so that the Laplacian operator gets replaced by a discrete approximation, 
+        
+        $${\begin{aligned} 
+        \nabla^2\psi \equiv \left({\partial^2 \over \partial x^2} + {\partial^2 \over \partial y^2}\right)\psi \rightarrow {1 \over a^2} \Bigl(
+                                 &\psi(\mathbf{r}+a\hat{\mathbf{x}}, t)  -2\psi(\mathbf{r}, t) + \psi(\mathbf{r}-a\hat{\mathbf{x}}, t) \; + \\
+                                 &\psi(\mathbf{r}+a\hat{\mathbf{y}}, t)  -2\psi(\mathbf{r}, t) + \psi(\mathbf{r}-a\hat{\mathbf{y}}, t) \Bigr) \; ,
+        \end{aligned}\tag{3}
+        }$$
+
+        and we also suppose that time advances in discrete steps of size $\Delta t$, so that the time derivative in (2) becomes
+        
+        $${ 
+            {\psi(\mathbf{r}, t + \Delta t) - \psi(\mathbf{r}, t) \over \Delta t } \;.  \tag{4}
+        }$$
+        
+        If we sample the initial wavefunction (1) onto the grid, we can use equation (4) iteratively to 
+        compute &nbsp;$\psi(\mathbf{r}, \Delta t)$, &nbsp;$\psi(\mathbf{r}, 2\Delta t)$, &nbsp;$\psi(\mathbf{r}, 3\Delta t),$ and so on.
+        <br/><br/>
+
+        This procedure works and is accurate so long as $\Delta t$ and $a$ are chosen small enough. 
+        (In the limit as these quantities approach zero, the discrete results approach the continuum solution arbitrarily closely.)
+        However, there are refinements that produce more accurate results when $\Delta t$ and $a$ are finite.
+
+        One such refinement is Visscher's algorithm <a href="#footnote-1">[Ref. 1]</a>. 
+        Visscher noted that if you split the wavefunction into its real and imaginary parts, $\psi = R + iI$, the Schr&#246;dinger equation is equivalent to
+       
+        $${
+            {\partial R \over \partial t} = H I \, , \quad \text{and} \quad {\partial I \over \partial t} = -H  R \, . \tag{5}
+        }$$
+       
+        If you further specify that $R$ and $I$ are defined at staggered times, $R$ at $\{0,\,$ $\Delta t,\,$ $2\Delta t,\,...\,\}$, and
+        $I$ at $\{\Delta t/2\,$, $3\Delta t/2\,...\,\}$, then the discretized version of (5) is
+       
+        $${\begin{aligned} 
+                R(t + \Delta t/2) &= R(t - \Delta t/2) + \Delta t \, H\,I(t) \; ,\\
+                I(t + \Delta t/2) &= I(t - \Delta t/2) - \Delta t \, H\,R(t) \,.
+        \end{aligned}\tag{6}
+        }$$
+
+        Why go to all this extra trouble? Because it can be shown that the system (6) is <br/>
+            <div style="height:0.35em;"></div>
+            &emsp;&emsp;&emsp;&emsp; (i) accurate to second order in $\Delta t$ (whereas equation (4) is only accurate to first order), <br/>
+            &emsp;&emsp;&emsp;&emsp; (ii) unitary, <i>i.e.</i>, probability is conserved at each step, and <br/>
+            &emsp;&emsp;&emsp;&emsp; (iii) stable for a wide range $\Delta t$'s.
+        
+        <br/><br/>
+        Regarding that last point, many numerical algorithms, including forward iteration based on equation (4), are unstable. 
+        That is, the errors grow exponentially with the number of time steps until they completely swamp the solution. 
+        The video below shows what this can look like in practice.
+        <br/><br/>
+        <div style="text-align: center;">
+            <video width="400" height="300" controls>
+                <source src="Unstable.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                Figure 1. The dire consequences of computing wave function evolution with an unstable algorithm.
+            </div>
+        </div>
+        <br/><br/>
+
+        A second refinement to the basic algorithm is the use of a higher-order formula for the discrete second derivative:
+        $${
+        {   \partial^2\psi \over \partial x^2} \rightarrow {1 \over a^2}\left(
+            -{1 \over 12} \psi(\mathbf{r} + 2a\hat{\mathbf{x}}) + {4 \over  3} \psi(\mathbf{r} +  a\hat{\mathbf{x}}) - {5 \over 2}\psi(\mathbf{r}) 
+            +{4 \over  3} \psi(\mathbf{r} -  a\hat{\mathbf{x}}) - {1 \over 12} \psi(\mathbf{r} - 2a\hat{\mathbf{x}}) \right) \; ,
+            \tag{7}
+        }$$ 
+        and similarly for $\partial^2\psi / \partial y^2$.
+        This is accurate to fourth order in $a$, versus second order for equation (3). (See reference <a href="#footnote-2">[Ref 2]</a>.)
+        Thus it allows us to create accurate simulations with larger grid spacings, and hence fewer grid points.
+
+        <br/><br/>
+        Up till now, we have avoided the question of what happens to the wavefunction at the grid boundaries. 
+        Evolving the wavefunction with no special treatment of the boundaries is equivalent to placing infinitely high potential barriers there, because the wavefunction
+        is implicitly zero just outside the grid. This results in unwanted reflections, which interfere with the scattering phenomena we're trying to visualize.
+        Figure 2 illustrates the problem.
+        <br/><br/>
+        <div style="text-align: center;">
+            <video width="400" height="300" controls>
+                <source src="Reflection.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                Figure 2. Unwanted reflections from a grid boundary.
+            </div>
+        </div>
+        <br/><br/>        
+
+        To address this problem, we introduce an imaginary-valued potential in the border region of the grid.
+        This potential effectively "absorbs" the wavefunction (<i>i.e.</i>, damps it exponentially ) rather than reflecting it. 
+        The results are illustrated in figures 3 and 4.
+
+        <br/><br/>
+        <div style="text-align: center;">
+            <video width="400" height="300" controls>
+                <source src="Border.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                Figure 3. An imaginary-valued potential in the gray border region damps the wavefunction there.
+            </div>
+        </div>
+
+        <br/><br/>
+        <div style="text-align: center;">
+            <video width="400" height="300" controls>
+                <source src="NoReflection.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                Figure 4. When the gray damping region is not rendered, the wavefunction appears to just travel off the grid edges without reflections, as desired.
+            </div>
+        </div>
+        <br/><br/>        
+
+        The code implementing all of the above ingredients is available in the 
+        <a href="https://github.com/Paul-G2/SchrodingerSandbox">project repository</a>.
+        Most of the computational work is done in the compute shaders. (The file names are 
+        computeShader.wgsl for WebGPU-enabled devices and computeShader.glsl for WebGL devices.)
+        
+    
+
+        <br/><br/><br/><br/><br/>
+        <h2>References</h2>
+        <p id="footnote-1">[1] Visscher, P. (1991) A Fast Explicit Algorithm for the Time-Dependent Schr&#246;dinger Equation. Computers in Physics, 5, 596-598.</p>
+        <p id="footnote-2">[2] Finite difference coefficient (2023) Wikipedia. 
+            Available at: <a href = https://en.wikipedia.org/wiki/Finite_difference_coefficient>https://en.wikipedia.org/wiki/Finite_difference_coefficient</a></p>
+        </span>
+        </div>
+    </div>
+    </body>
+
+</html>
