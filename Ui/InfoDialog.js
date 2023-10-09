@@ -28,7 +28,7 @@ InfoDialog = class
             border:'1px solid black'} );
             
         // Titlebar 
-        const titleFontSize = (.03 * this.height).toString() + 'vh';
+        const titleFontSize = (.04 * this.height).toString() + 'vh';
         this.titleDiv = UiUtils.CreateElement('div', 'dialog_titlediv', this.mainDiv, 
             {width:'95%',height:'7%', left:'0px', top:'0px', display:'flex', alignItems:'center', 
             justifyContent:'center', backgroundColor:'#c09f72', fontSize:titleFontSize, 
@@ -76,14 +76,21 @@ InfoDialog = class
 
         '<p>The height of the orange surface gives the probability of finding the scattered particle at each grid point, and the white bands show where the phase of the wavefunction is zero.</p>' +
 
-        '<p>The calculations are done on your device\'s GPU, via WebGPU or WebGL, whichever is available.</p>' +
-        '<p>(If your device doesn\'t have a GPU, then the app won\'t run!)</p>' +
+        '<p>The calculations are done on your device\'s GPU, via WebGPU or WebGL, whichever is available. ' +
+        '(If your device doesn\'t have a GPU, then the app won\'t run!)</p>' +
 
         '<p>The scattering obstacles can be chosen from the upper-right palette, ' +
         'and then moved and rotated interactively.</p>' +
 
         '<p>If you\'re interested in  the implementation details, you can check out the ' + 
         '<a href="https://github.com/Paul-G2/Schrodinger-Sandbox" target="_blank" rel="noopener noreferrer">project repository</a> on GitHub.</p>' +
+
+        '<div style="height:5px;"></div>' +
+        '<h4 style="margin-bottom:-18px; color:blue;">Notes:</h4>' + 
+        '<ul style="color:blue;">'  + 
+            '<li>#Note1#</li>' + 
+            '<li>#Note2#</li>' + 
+        '</ul>' + 
         '<br />';
     } 
 

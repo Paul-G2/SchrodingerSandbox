@@ -30,18 +30,16 @@ RunParams = class
             Wavefunction.GaussianWavePacket(this.initialWfParams, this.grid);
         
         // Estimate the momentum in the initial wf (so we can calculate a reasonable Vmax, below)
-        const grid = this.grid
-        const a = grid.spacing;
-        const dbw = grid.dampingBorder;
+        const [nx, ny, a, dbw] = [this.grid.nx, this.grid.ny, this.grid.spacing, this.grid.dampingBorder];
         const iwp = this.initialWfParams
         const pWf = Math.max(
-            Math.abs(iwp.p.x) + 2*Math.abs(1/(iwp.width.x*a*(grid.nx - 2*dbw))),
-            Math.abs(iwp.p.y) + 2*Math.abs(1/(iwp.width.y*a*(grid.ny - 2*dbw)))
+            Math.abs(iwp.p.x) + 2*Math.abs(1/(iwp.width.x*a*(nx - 2*dbw))),
+            Math.abs(iwp.p.y) + 2*Math.abs(1/(iwp.width.y*a*(ny - 2*dbw)))
         );
 
         this.mass               = 1;      
         this.showDampingBorder  = false;
-        this.potential          = new Float32Array(grid.nx * grid.ny), 
+        this.potential          = new Float32Array(nx * ny), 
         this.Vmax               = 4 * pWf**2 /(2*this.mass); // Several times the kinetic energy in the initial wavefunction
         this.timeStep           = 0.2 / (1/(this.mass*a*a) + this.Vmax); // Chosen to make the Visscher algorithm stable
         
