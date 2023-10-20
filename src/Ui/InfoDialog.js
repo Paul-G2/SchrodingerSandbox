@@ -79,7 +79,7 @@ InfoDialog = class
         '<p>The calculations are done on your device\'s GPU, via WebGPU or WebGL, whichever is available. ' +
         '(If your device doesn\'t have a GPU, then the app won\'t run!)</p>' +
 
-        '<p>The scattering obstacles can be chosen from the upper-right palette, ' +
+        '<p>Scattering obstacles can be added by clicking on the upper-right palette, ' +
         'and then moved and rotated interactively.</p>' +
 
         '<p>If you\'re interested in  the implementation details, you can check out the ' + 
