@@ -30,7 +30,6 @@ class Display
             color:'#ffffff', fontFamily:'Arial', fontWeight:'normal', 
             fontStyle:'italic', fontSize: '4.25vh', display:'flex'}
         );
-        this.shield.innerHTML = 'Initializing...'; 
 
         // Disable context menu and selection
         document.getElementById('display-canvas').className += ' noselect';
@@ -50,8 +49,9 @@ class Display
      * Raises the shield.
      * 
      */
-    raiseShield()
+    raiseShield(message)
     {
+        this.shield.innerHTML = message || ""; 
         this.shield.style.display = 'flex';
     }
 
