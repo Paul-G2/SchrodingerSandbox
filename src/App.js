@@ -56,7 +56,7 @@ class App
     async initialize()
     {        
         // Try to create an engine
-        this.raiseShield();
+        this.raiseShield('Initializing...');
         try 
         {
             let engineOk = true;
@@ -94,7 +94,6 @@ class App
                 '#Note2#', 'Grid size set to ' + rp.grid.nx.toString() + ', FPS = ' + fps.toString() + '.' );
 
             // Render the initial scene
-            
             rp.showDampingBorder = this.showBorder;
             rp.obstacleSet.add( new DoubleSlit(), false );
             this.engine.setRunParams(rp);
@@ -105,10 +104,12 @@ class App
             }.bind(this));     
         }
         catch (err) {
-            const msg = err && err.message ? err.message : "An exception occurred.";
-            alert(msg);
-            Logger.error(msg);
-            this.lowerShield();
+            const rawMsg = (err && err.message) ? err.message : null;
+            let userMsg = "Initialization failed due to low graphics memory. Try closing other browser tabs, then reload this page."
+            if (rawMsg) { userMsg += "\n\nError details: " + rawMsg; }
+            Logger.error(userMsg);
+            alert(userMsg);
+            this.raiseShield("");
         }
     }
 
@@ -268,9 +269,9 @@ class App
      * Raises the shield.
      * 
      */
-    raiseShield()
+    raiseShield(message)
     {
-        this.display.raiseShield();
+        this.display.raiseShield(message);
         this.controls.raiseShield();
     }
 
