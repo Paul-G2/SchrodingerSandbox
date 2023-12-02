@@ -74,13 +74,13 @@ InfoDialog = class
         '<p></p>' + 
         '<p>This app simulates quantum mechanical wavepacket scattering, by solving the Schr\xF6dinger equation in real time on a 2-dimensional grid.</p>' +
 
+        '<p>Scattering obstacles can be added by clicking on the upper-right palette, ' +
+        'and they can be moved and rotated interactively.</p>' +
+
         '<p>The height of the orange surface gives the probability of finding the scattered particle at each grid point, and the white bands show where the phase of the wavefunction is zero.</p>' +
 
         '<p>The calculations are done on your device\'s GPU, via WebGPU or WebGL, whichever is available. ' +
         '(If your device doesn\'t have a GPU, then the app won\'t run!)</p>' +
-
-        '<p>Scattering obstacles can be added by clicking on the upper-right palette, ' +
-        'and they can be moved and rotated interactively.</p>' +
 
         '<p>If you\'re interested in  the implementation details, you can check out the ' + 
         '<a href="https://github.com/Paul-G2/Schrodinger-Sandbox" target="_blank" rel="noopener noreferrer">project repository</a> on GitHub.</p>' +
