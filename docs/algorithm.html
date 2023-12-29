@@ -26,7 +26,7 @@
         <h1 style="text-align:center; margin-top:8px">Algorithm Details</h1>
         <br/><br/>
         Our initial state is always a 2-dimensional Gaussian wavepacket 
-        centered at some $\mathbf{r}_0$, with width $\sigma$ and average momentum $\mathbf{k}$:
+        centered at some point $\mathbf{r}_0$, with width $\sigma$ and average momentum $\mathbf{k}$:
         $${ 
             \psi(\mathbf{r},0) = N \, e^{-(\mathbf{r}-\mathbf{r_0})^2 / 2\sigma^2} \; e^{i\mathbf{k}\cdot\mathbf{r}} \; , \tag{1}
         }$$
@@ -59,23 +59,23 @@
             {\psi(\mathbf{r}, t + \Delta t) - \psi(\mathbf{r}, t) \over \Delta t } \;.  \tag{4}
         }$$
         
-        If we sample the initial wavefunction (1) onto the grid, we can use equation (4) iteratively to 
+        If we sample the initial wavefunction (1) onto the grid, we can use these equations to iteratively 
         compute &nbsp;$\psi(\mathbf{r}, \Delta t)$, &nbsp;$\psi(\mathbf{r}, 2\Delta t)$, &nbsp;$\psi(\mathbf{r}, 3\Delta t),$ and so on.
         <br/><br/>
 
         This procedure works and is accurate so long as $\Delta t$ and $a$ are chosen small enough. 
-        (In the limit as these quantities approach zero, the discrete results approach the continuum solution arbitrarily closely.)
+        (In the limit as they approach zero, the discrete results approach the continuum solution arbitrarily closely.)
         However, there are refinements that produce more accurate results when $\Delta t$ and $a$ are finite.
 
-        One such refinement is Visscher's algorithm <a href="#footnote-1">[Ref. 1]</a>. 
-        Visscher noted that if you split the wavefunction into its real and imaginary parts, $\psi = R + iI$, the Schr&#246;dinger equation is equivalent to
+        One such refinement is <i>Visscher's algorithm</i> <a href="#footnote-1">[Ref. 1]</a>: 
+        If the wavefunction is split into its real and imaginary parts, $\psi = R + iI$, the Schr&#246;dinger equation is equivalent to
        
         $${
             {\partial R \over \partial t} = H I \, , \quad \text{and} \quad {\partial I \over \partial t} = -H  R \, . \tag{5}
         }$$
        
-        If you further specify that $R$ and $I$ are defined at staggered times, $R$ at $\{0,\,$ $\Delta t,\,$ $2\Delta t,\,...\,\}$, and
-        $I$ at $\{\Delta t/2\,$, $3\Delta t/2\,...\,\}$, then the discretized version of (5) is
+        And if $R$ and $I$ are defined at staggered times, $R$ at times $\{0,\,$ $\Delta t,\,$ $2\Delta t,\,...\,\}$, and
+        $I$ at times $\{\Delta t/2\,$, $3\Delta t/2\,...\,\}$, then the discretized version of (5) is
        
         $${\begin{aligned} 
                 R(t + \Delta t/2) &= R(t - \Delta t/2) + \Delta t \, H\,I(t) \; ,\\
@@ -83,24 +83,24 @@
         \end{aligned}\tag{6}
         }$$
 
-        Why go to all this extra trouble? Because it can be shown that the system (6) is <br/>
+        Why go to all this trouble? Because it can be shown that the system (6) is <br/>
             <div style="height:0.35em;"></div>
             &emsp;&emsp;&emsp;&emsp; (i) accurate to second order in $\Delta t$ (whereas equation (4) is only accurate to first order), <br/>
             &emsp;&emsp;&emsp;&emsp; (ii) unitary, <i>i.e.</i>, probability is conserved at each step, and <br/>
-            &emsp;&emsp;&emsp;&emsp; (iii) stable for a wide range $\Delta t$'s.
+            &emsp;&emsp;&emsp;&emsp; (iii) stable for a wide range of $\Delta t$'s.
         
         <br/><br/>
         Regarding that last point, many numerical algorithms, including forward iteration based on equation (4), are unstable. 
         That is, the errors grow exponentially with the number of time steps until they completely swamp the solution. 
         The video below shows what this can look like in practice.
-        <br/><br/>
+        <br/><br/><br/>
         <div style="text-align: center;">
             <video width="400" height="300" controls>
                 <source src="Unstable.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div>
-                Figure 1. The dire consequences of computing wave function evolution with an unstable algorithm.
+                <b><small>Figure 1. The dire consequences of computing wave function evolution with an unstable algorithm.</small></b>
             </div>
         </div>
         <br/><br/>
@@ -114,11 +114,11 @@
         }$$ 
         and similarly for $\partial^2\psi / \partial y^2$.
         This is accurate to fourth order in $a$, versus second order for equation (3). (See reference <a href="#footnote-2">[Ref 2]</a>.)
-        Thus it allows us to create accurate simulations with larger grid spacings, and hence fewer grid points.
+        Thus it lets us create simulations with larger grid spacings (and hence fewer grid points) while maintaining accuracy.
 
-        <br/><br/>
+        <br/><br/><br/>
         Up till now, we have avoided the question of what happens to the wavefunction at the grid boundaries. 
-        Evolving the wavefunction with no special treatment of the boundaries is equivalent to placing infinitely high potential barriers there, because the wavefunction
+        Evolving the wavefunction with no special treatment at the boundaries is equivalent to placing infinitely high potential barriers there, because the wavefunction
         is implicitly zero just outside the grid. This results in unwanted reflections, which interfere with the scattering phenomena we're trying to visualize.
         Figure 2 illustrates the problem.
         <br/><br/>
@@ -128,12 +128,12 @@
                 Your browser does not support the video tag.
             </video>
             <div>
-                Figure 2. Unwanted reflections from a grid boundary.
+                <b><small>Figure 2. Unwanted reflections from a grid boundary.</small></b>
             </div>
         </div>
         <br/><br/>        
 
-        To address this problem, we introduce an imaginary-valued potential in the border region of the grid.
+        To fight this problem, we can introduce an imaginary-valued potential in the border region of the grid.
         This potential effectively "absorbs" the wavefunction (<i>i.e.</i>, damps it exponentially ) rather than reflecting it. 
         The results are illustrated in figures 3 and 4.
 
@@ -144,7 +144,7 @@
                 Your browser does not support the video tag.
             </video>
             <div>
-                Figure 3. An imaginary-valued potential in the gray border region damps the wavefunction there.
+                <b><small>Figure 3. An imaginary-valued potential in the gray border region damps the wavefunction there.</small></b>
             </div>
         </div>
 
@@ -155,7 +155,7 @@
                 Your browser does not support the video tag.
             </video>
             <div>
-                Figure 4. When the gray damping region is not rendered, the wavefunction appears to just travel off the grid edges without reflections, as desired.
+                <b><small>Figure 4. When the gray border region is not rendered, the wavefunction appears to just travel off the grid edges without reflection, as desired.</small></b>
             </div>
         </div>
         <br/><br/>        
