@@ -102,6 +102,7 @@ class App
                 this.engine.evolveAndRender(0); 
                 this.lowerShield();
             }.bind(this));     
+            setTimeout( function(){ this.controls.animatePlayButton() }.bind(this), 1500 );
         }
         catch (err) {
             const rawMsg = (err && err.message) ? err.message : null;
