@@ -28,7 +28,7 @@ Interactor = class
         this.activeObjectPivotPt = null;
         this.mode = 'none'; 
         this.timerId = undefined;
-        this.removeShapeSound = new Audio('./media/removeShapeSound.mp3');
+        this.removeShapeSound = new Audio('./removeShapeSound.mp3');
         this.removeShapeSound.preload = 'auto';
 
         // Precompute the model transform
