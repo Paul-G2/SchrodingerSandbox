@@ -34,7 +34,7 @@ class Display
         this.progressDiv = UiUtils.CreateElement('div', 'progress-div', this.shield, 
         {left:'0%', top:'43%', width:'100%', height:'25%', borderWidth:'0px', display:'flex', justifyContent:'center'});
         this.progressDiv.className += " noselect";
-        this.progressDiv.innerHTML = '<img src="./media/ProgressBar.svg" border="0" width="100%" height="100%" draggable="false">';
+        this.progressDiv.innerHTML = '<img src="./ProgressBar.svg" border="0" width="100%" height="100%" draggable="false">';
 
         this.messageDiv = UiUtils.CreateElement('div', 'message-div', this.shield, 
         {left:'0%', top:'45%', width:'100%', height:'auto', display:'flex', justifyContent:'center', borderWidth:'0px', zIndex:'2'});
