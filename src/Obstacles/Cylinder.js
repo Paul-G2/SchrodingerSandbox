@@ -18,8 +18,8 @@ class Cylinder extends Obstacle
         this.center = [...center];
         this.radius = radius;
         this.height = height;
-        this.vMax = vMax;
-        this.color = [...color];
+        this.vMax   = vMax;
+        this.color  = [...color];
 
         this.update();
     }

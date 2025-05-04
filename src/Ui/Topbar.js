@@ -14,10 +14,10 @@ class Topbar
      */
     constructor(app, parentDiv) 
     { 
-        this.app = app;
-        this.parentDiv = parentDiv;   
-        this.animating = false;
-        this.umlautOpacity = 0.9;
+        this.app              = app;
+        this.parentDiv        = parentDiv;   
+        this.animating        = false;
+        this.umlautOpacity    = 0.9;
         this.deltaOpacitySign = 1;
 
         this.titleSpan1 = UiUtils.CreateElement('span', 'title-span', 

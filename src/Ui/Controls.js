@@ -14,10 +14,10 @@ class Controls
      */
     constructor(app, parentDiv) 
     { 
-        this.app = app;
-        this.parentDiv = parentDiv;   
-        this.infoDialog = new InfoDialog(parentDiv);
-        this.flashPlayBtn = true;
+        this.app           = app;
+        this.parentDiv     = parentDiv;   
+        this.infoDialog    = new InfoDialog(parentDiv);
+        this.flashPlayBtn  = true;
         const backgndColor = this.backgndColor = '#679ab9';
 
 

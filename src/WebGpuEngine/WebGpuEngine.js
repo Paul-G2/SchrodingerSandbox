@@ -12,21 +12,21 @@ class WebGpuEngine
      */
     constructor(app, workgroupSize={x:8, y:8}) 
     {
-        this.type = "WebGPU";
-        this.app = app;
-        this.canvas = app.display.canvas;
+        this.type          = "WebGPU";
+        this.app           = app;
+        this.canvas        = app.display.canvas;
         this.workgroupSize = {...workgroupSize};
-        this.device = null;
-        this.initialized = false;
-        this.runParams = null;
+        this.device        = null;
+        this.initialized   = false;
+        this.runParams     = null;
 
         this.computePipelineA = null;
         this.computePipelineB = null;
-        this.renderPipeline = null;
+        this.renderPipeline   = null;
+        this.bkgndPipeline    = null;
+        this.pickPipeline     = null;
         this.renderAntiAliasedPipeline = null;
-        this.bkgndPipeline = null;
         this.bkgndAntiAliasedPipeline = null;
-        this.pickPipeline = null;
 
         this.depthTexture = null;
         this.msaaTexture = null;
