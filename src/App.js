@@ -12,12 +12,12 @@ class App
     constructor() 
     { 
         // Create the app components
-        this.topBar = new Topbar(this, document.getElementById('topbar_area'));
-        this.display = new Display(this, document.getElementById('display_area'));
+        this.topBar      = new Topbar(this, document.getElementById('topbar_area'));
+        this.display     = new Display(this, document.getElementById('display_area'));
         this.toolPalette = new ToolPalette(this, document.getElementById('controls_area'));
-        this.controls = new Controls(this, document.getElementById('controls_area'));
-        this.interactor = new Interactor(this);
-        this.engine = null;
+        this.controls    = new Controls(this, document.getElementById('controls_area'));
+        this.interactor  = new Interactor(this);
+        this.engine      = null;
 
         // State variables
         this.evolving = false;

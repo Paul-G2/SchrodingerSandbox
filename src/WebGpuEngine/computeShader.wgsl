@@ -2,10 +2,10 @@
 // This is a compute shader that evolves the wavefunction by one time step. 
 //
 struct Uniforms {
-    n: vec2<u32>,
-    gridSpacing: f32,
-    timeStep: f32,
-    mass: f32
+    n           : vec2<u32>,
+    gridSpacing : f32,
+    timeStep    : f32,
+    mass        : f32
 };
 
 @group(0) @binding(0) var<uniform> uni: Uniforms;

@@ -9,8 +9,7 @@ class Logger
      * @constructor
      * 
      */
-    constructor() 
-    { }
+    constructor() { }
   
   
     /**

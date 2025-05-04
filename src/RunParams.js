@@ -17,8 +17,7 @@ RunParams = class
         this.app = app;
 
         // Set the grid params
-        this.grid = {nx: gridSize, ny:gridSize, 
-            spacing:160/gridSize, dampingBorder:Math.round(gridSize/6)};
+        this.grid = {nx: gridSize, ny:gridSize, spacing:160/gridSize, dampingBorder:Math.round(gridSize/6)};
         
         // Set the initial wavefunction
         this.initialWfParams = {

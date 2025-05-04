@@ -15,17 +15,16 @@ class Arc extends Obstacle
         // Inherit from Obstacle
         super('arc');
         
-        this.center = [...center];
-        this.radius = radius;
+        this.center    = [...center];
+        this.radius    = radius;
         this.thickness = thickness;
-        this.angle = angle;
-        this.span = span;
-        this.height = height;
-        this.vMax = vMax;
-        this.color = [...color];
-
-        this.minRsq = (radius - thickness/2)**2;
-        this.maxRsq = (radius + thickness/2)**2;
+        this.angle     = angle;
+        this.span      = span;
+        this.height    = height;
+        this.vMax      = vMax;
+        this.color     = [...color];
+        this.minRsq    = (radius - thickness/2)**2;
+        this.maxRsq    = (radius + thickness/2)**2;
         
         this.update();
     }

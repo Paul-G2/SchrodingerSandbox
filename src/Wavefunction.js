@@ -98,7 +98,7 @@ Wavefunction = class
         const nxy = nx*ny;
         for (let n=0; n<nxy; n++)
         {
-            wf.realPart[n] *= normInv;
+            wf.realPart[n]  *= normInv;
             wf.imagPartM[n] *= normInv;
             wf.imagPartP[n] *= normInv;
         }

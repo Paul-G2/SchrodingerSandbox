@@ -14,11 +14,11 @@ class ToolPalette
      */
     constructor(app, parentDiv) 
     { 
-        this.app = app;
-        this.parentDiv = parentDiv;   
-        this.addShapeSound = new Audio('./media/addShapeSound.mp3');
+        this.app                   = app;
+        this.parentDiv             = parentDiv;   
+        this.addShapeSound         = new Audio('./media/addShapeSound.mp3');
         this.addShapeSound.preload = 'auto';
-        const btnColor = '#99d9ea';
+        const btnColor             = '#99d9ea';
 
         const self = this;
         this.cylBtn = this.createObstacleButton('cyl-obstacle-btn', 1, 1, btnColor, "./media/cyl.png");

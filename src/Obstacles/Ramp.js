@@ -17,11 +17,11 @@ class Ramp extends Obstacle
         
         this.center = [...center];
         this.length = length;
-        this.depth = depth;
-        this.angle = angle;
+        this.depth  = depth;
+        this.angle  = angle;
         this.height = height;
-        this.vMax = vMax;
-        this.color = [...color];
+        this.vMax   = vMax;
+        this.color  = [...color];
         this.potentialIsConstant = false;
 
         this.update();

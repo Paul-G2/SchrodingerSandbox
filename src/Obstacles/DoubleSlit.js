@@ -15,15 +15,15 @@ class DoubleSlit extends Obstacle
         // Inherit from Obstacle
         super('double-slit');
         
-        this.center = [...center];
-        this.length = length;
-        this.thickness = thickness;
-        this.slitWidth = slitWidth;
+        this.center         = [...center];
+        this.length         = length;
+        this.thickness      = thickness;
+        this.slitWidth      = slitWidth;
         this.slitSeparation = slitSeparation;
-        this.angle = angle;
-        this.height = height;
-        this.vMax = vMax;
-        this.color = [...color];
+        this.angle          = angle;
+        this.height         = height;
+        this.vMax           = vMax;
+        this.color          = [...color];
 
         this.update();
     }

@@ -15,13 +15,13 @@ class Box extends Obstacle
         // Inherit from Obstacle
         super('box');
         
-        this.center = [...center];
-        this.length = length;
+        this.center    = [...center];
+        this.length    = length;
         this.thickness = thickness;
-        this.angle = angle;
-        this.height = height;
-        this.vMax = vMax;
-        this.color = [...color];
+        this.angle     = angle;
+        this.height    = height;
+        this.vMax      = vMax;
+        this.color     = [...color];
 
         this.update();
     }
