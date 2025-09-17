@@ -203,7 +203,7 @@ class App
         // Gradually increase resolution until the performance degrades
         let fpsVals = [];
         let fpsText = [];
-        const rezList = [128, 192, 256, 384, 512, 768, 1024, 1536, 2048];
+        const rezList = [128, 192, 256, 384, 512, 768, 1024]; //, 1536, 2048];
         let r = 0;
         for (r=0; r < rezList.length; r++) {
             try {
@@ -288,3 +288,4 @@ class App
     }
 
 };
+
